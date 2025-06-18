@@ -1,0 +1,60 @@
+@use "../../variables.scss";
+
+.body {
+  font-display: fallback;
+  font-family:
+    PT Sans,
+    sans-serif;
+  background: var(--light);
+  color: var(--grey);
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-areas:
+    "header languages"
+    "menu menu"
+    "content content"
+    "footer footer";
+  grid-template-rows: auto auto 1fr auto;
+  grid-template-columns: 3fr 1fr;
+}
+
+@media screen and (min-width: variables.$CSS_BREAKPOINT_START_L) {
+  .body {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.c4kMain {
+  grid-area: content;
+  align-self: center;
+  display: block;
+  padding: var(--vRhythm) var(--gutter);
+}
+
+.c4kMain > div {
+  padding: calc(var(--vRhythm) * 2) var(--gutter);
+  max-width: calc(var(--gutter) * var(--maxWritingsWidth));
+  margin: 0 auto;
+}
+
+@media screen and (min-width: variables.$CSS_BREAKPOINT_START_L) {
+  .c4kMain > div {
+    padding: calc(var(--vRhythm) * 2) var(--gutter);
+  }
+}
+@media screen and (min-width: variables.$CSS_BREAKPOINT_START_XL) {
+  .c4kMain > div {
+    padding: calc(var(--vRhythm) * 3) var(--gutter);
+  }
+}
+
+@media print {
+  .c4kMain {
+    grid-template-areas:
+      "header header"
+      "menu menu"
+      "content content"
+      "footer footer";
+  }
+}

@@ -1,0 +1,69 @@
+@use "../styles/variables.scss";
+
+.c4kLanguages {
+  grid-area: languages;
+  display: flex;
+  justify-content: flex-end;
+  padding: calc(var(--vRhythm) / 2) calc(var(--gutter) / 2) calc(var(--vRhythm) / 2)
+    calc(var(--gutter) / 2);
+  text-align: right;
+}
+
+.c4kLanguages ul,
+.c4kLanguages li {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.c4kLanguages ul {
+  display: flex;
+  flex-direction: row;
+  gap: calc(var(--gutter) / 4);
+}
+
+.c4kLanguages li {
+  display: block;
+}
+
+.c4kLanguagesFlag a {
+  display: block;
+  width: calc(var(--vRhythm) * 1.5);
+  height: var(--vRhythm);
+  text-decoration: none;
+  background-size: cover;
+  background-position: center;
+}
+
+.c4kLanguagesFlag span {
+  display: none;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
+
+.c4kLanguagesFlagFr a {
+  background-image: url(/images/flags/fr.svg);
+}
+.c4kLanguagesFlagFr:not(.selected) {
+  display: none;
+}
+.c4kLanguagesFlagEn a {
+  background-image: url(/images/flags/en-US.svg);
+}
+.c4kLanguagesFlagEn:not(.selected) {
+  display: none;
+}
+
+@media screen and (min-width: variables.$CSS_BREAKPOINT_START_L) {
+  .c4kLanguages {
+    margin-left: 0;
+    text-align: left;
+  }
+}
+
+@media print {
+  .c4kLanguages {
+    display: none;
+  }
+}

@@ -1,0 +1,20 @@
+.p {
+  text-align: center;
+}
+
+.ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  list-style-type: none;
+}
+
+.li {
+  display: block;
+  position: relative;
+  list-style-type: none;
+  height: 6rem;
+  width: 6rem;
+  border-radius: 15px;
+}
+

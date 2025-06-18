@@ -1,0 +1,75 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  gap: var(--gutter);
+}
+.display {
+  width: 500px;
+  flex-grow: 2;
+  flex-shrink: 0;
+}
+.display svg {
+  background-position: center;
+  background-size: cover;
+  background-color: rgba(255, 255, 255, 0.8);
+  background-blend-mode: lighten;
+}
+
+.editor {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--vRhythm) / 2);
+}
+
+.toolbar {
+  background-color: var(--primary);
+  height: calc(var(--vRhythm) * 2);
+}
+.textarea {
+  width: 100%;
+  height: calc(var(--vRhythm) * 8);
+  padding: var(--gutter) var(--vRhythm);
+  font-family: monospace;
+  font-size: larger;
+}
+.info {
+  font-size: var(--smallFontSize);
+  line-height: var(--smallLineHeight);
+  font-weight: var(--smallFontWeight);
+}
+.warning {
+  font-size: var(--smallFontSize);
+  line-height: var(--smallLineHeight);
+  font-weight: var(--smallFontWeight);
+  color: var(--warning);
+}
+.danger {
+  font-size: var(--smallFontSize);
+  line-height: var(--smallLineHeight);
+  font-weight: var(--smallFontWeight);
+  color: var(--danger);
+}
+.documentation {
+  width: 100%;
+  height: calc(var(--vRhythm) * 8);
+  overflow: auto;
+}
+
+.ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  list-style-type: none;
+}
+
+.li {
+  display: block;
+  list-style-type: none;
+}
+
+.img {
+  height: 6rem;
+  width: 6rem;
+  border-radius: 15px;
+}

@@ -1,0 +1,45 @@
+{
+  "meta": {
+    "locale": "en_US",
+    "banner": {
+      "alt": "Website banner"
+    }
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "It seems that the page you look for doesn't exist."
+  },
+  "pages": {
+    "back": {
+      "label": "Back",
+      "title": "Back to the homepage"
+    }
+  },
+  "header": {
+    "alt": "Code4Kidz's Logo"
+  },
+  "menu": {
+    "home": {
+      "label": "Home",
+      "title": "Go back to home page"
+    },
+    "learn": {
+      "label": "Learn",
+      "title": "Learn to code"
+    },
+    "about": {
+      "label": "About",
+      "title": "Read more about this tiny project"
+    }
+  },
+  "learn": {
+    "title": "Learn to code",
+    "description": "Choose a creature and start coding!",
+    "contents": "Follow the creatures order to incrementally learn to code and follow the story."
+  },
+  "editor": {
+    "placeholder": "Type your code here…",
+    "length": "Char length:",
+    "syntax": "Syntax Error:"
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "meta": {
+    "locale": "fr_FR",
+    "banner": {
+      "alt": "Bannière du site"
+    }
+  },
+  "notFound": {
+    "title": "Page non-trouvée",
+    "description": "La page que vous recherchez n’existe pas ou plus."
+  },
+  "pages": {
+    "back": {
+      "label": "Retour",
+      "title": "Retour à l’accueil"
+    }
+  },
+  "header": {
+    "alt": "Logo de Code4Kidz"
+  },
+  "menu": {
+    "home": {
+      "label": "Accueil",
+      "title": "Retour à l’accueil"
+    },
+    "learn": {
+      "label": "Apprendre",
+      "title": "Apprendre à coder"
+    },
+    "about": {
+      "label": "À propos",
+      "title": "En savoir plus au sujet de ce projet"
+    }
+  },
+  "learn": {
+    "title": "Apprendre à coder",
+    "description": "Choisis ta créature !",
+    "contents": "Suis l’ordre des créatures pour apprendre à coder progressivement."
+  },
+  "editor": {
+    "placeholder":"Saisis le code ici…",
+    "length": "Nombre de caractères :",
+    "syntax": "Erreur de syntaxe :"
+  }
+}

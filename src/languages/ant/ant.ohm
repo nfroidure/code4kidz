@@ -1,0 +1,30 @@
+Program {
+  command
+    = (space* pixelToCommand)*
+
+  pixelToCommand
+    = absolutePixelToCommand
+    | relativePixelToCommand
+
+  absolutePixelToCommand
+    = absolutePixelToToken space* coordinatePairSequence
+  absolutePixelToToken = "P"
+  relativePixelToCommand
+    = relativePixelToToken space* coordinatePairSequence
+  relativePixelToToken = "p"
+
+  coordinatePairSequence
+    = coordinatePair coordinateSeparator? coordinatePairSequence -- recursive
+    | coordinatePair -- single
+
+  coordinatePair = coordinate coordinateSeparator coordinate
+
+  coordinate = integer+
+
+  coordinateSeparator
+    = space+ ","? space* -- space
+    | "," space* -- comma
+
+  integer
+    = digit+
+}

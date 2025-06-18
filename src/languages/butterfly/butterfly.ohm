@@ -1,0 +1,82 @@
+Program {
+  command
+    = space* (moveToCommand (space* drawToCommand)*)? space*
+
+  drawToCommand
+    = moveToCommand
+    | absoluteLineToCommand
+    | relativeLineToCommand
+    | absoluteVerticalLineToCommand
+    | relativeVerticalLineToCommand
+    | absoluteHorizontalLineToCommand
+    | relativeHorizontalLineToCommand
+    | absoluteEllipticalArcCommand
+    | relativeEllipticalArcCommand
+    | absoluteClosePathToken
+    | relativeClosePathToken
+
+  absoluteEllipticalArcCommand
+    = absoluteEllipticalArcToken space* ellipticalArcArgumentSequence
+  absoluteEllipticalArcToken = "A"
+  relativeEllipticalArcCommand
+    = relativeEllipticalArcToken space* ellipticalArcArgumentSequence
+  relativeEllipticalArcToken = "a"
+
+  ellipticalArcArgumentSequence
+    = ellipticalArcArgument --single
+      | (ellipticalArcArgument coordinateSeparator? ellipticalArcArgumentSequence) -- recursive
+
+  ellipticalArcArgument
+    = coordinatePair coordinateSeparator? relativeNumber coordinateSeparator
+      flag coordinateSeparator? flag coordinateSeparator? coordinatePair
+
+  absoluteClosePathToken = "Z"
+  relativeClosePathToken = "z"
+
+  absoluteLineToCommand
+    = absoluteLineToToken space* coordinatePairSequence
+  absoluteLineToToken = "L"
+  relativeLineToCommand
+    = relativeLineToToken space* coordinatePairSequence
+  relativeLineToToken = "l"
+
+  absoluteVerticalLineToCommand
+    = absoluteVerticalLineToToken space* coordinateSequence
+  absoluteVerticalLineToToken = "V"
+  relativeVerticalLineToCommand
+    = relativeVerticalLineToToken space* coordinateSequence
+  relativeVerticalLineToToken = "v"
+
+  absoluteHorizontalLineToCommand
+    = absoluteHorizontalLineToToken space* coordinateSequence
+  absoluteHorizontalLineToToken = "H"
+  relativeHorizontalLineToCommand
+    = relativeHorizontalLineToToken space* coordinateSequence
+  relativeHorizontalLineToToken = "h"
+
+  moveToCommand = moveToToken space* coordinatePairSequence
+  moveToToken = "M" | "m"
+
+  coordinatePairSequence
+    = coordinatePair coordinateSeparator? coordinatePairSequence -- recursive
+    | coordinatePair -- single
+
+  coordinateSequence
+    = relativeNumber coordinateSeparator? coordinateSequence -- recursive
+    | relativeNumber --single
+
+  coordinatePair = relativeNumber coordinateSeparator? relativeNumber
+
+  relativeNumber = sign? number
+
+  coordinateSeparator
+    = space+ ","? space* -- space
+    | "," space* -- comma
+
+  sign = "-" | "+"
+  flag = "0" | "1"
+
+  number
+    =  digit* "." digit+ --decimal
+    | digit+ --integer
+}

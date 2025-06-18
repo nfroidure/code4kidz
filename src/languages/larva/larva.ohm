@@ -1,0 +1,63 @@
+Program {
+  command
+    = space* (moveToCommand (space* drawToCommand)*)? space*
+
+  drawToCommand
+    = moveToCommand
+    | absoluteLineToCommand
+    | relativeLineToCommand
+    | absoluteVerticalLineToCommand
+    | relativeVerticalLineToCommand
+    | absoluteHorizontalLineToCommand
+    | relativeHorizontalLineToCommand
+    | absoluteClosePathToken
+    | relativeClosePathToken
+      
+  absoluteClosePathToken = "Z"
+  relativeClosePathToken = "z"
+
+  absoluteLineToCommand
+    = absoluteLineToToken space* coordinatePairSequence
+  absoluteLineToToken = "L"
+  relativeLineToCommand
+    = relativeLineToToken space* coordinatePairSequence
+  relativeLineToToken = "l"
+
+  absoluteVerticalLineToCommand
+    = absoluteVerticalLineToToken space* coordinateSequence
+  absoluteVerticalLineToToken = "V"
+  relativeVerticalLineToCommand
+    = relativeVerticalLineToToken space* coordinateSequence
+  relativeVerticalLineToToken = "v"
+
+  absoluteHorizontalLineToCommand
+    = absoluteHorizontalLineToToken space* coordinateSequence
+  absoluteHorizontalLineToToken = "H"
+  relativeHorizontalLineToCommand
+    = relativeHorizontalLineToToken space* coordinateSequence
+  relativeHorizontalLineToToken = "h"
+
+  moveToCommand = moveToToken space* coordinatePairSequence
+  moveToToken = "M" | "m"
+
+  coordinatePairSequence
+    = coordinatePair coordinateSeparator? coordinatePairSequence -- recursive
+    | coordinatePair -- single
+
+  coordinateSequence
+    = coordinate coordinateSeparator? coordinateSequence -- recursive
+    | coordinate --single
+
+  coordinatePair = coordinate coordinateSeparator coordinate
+
+  coordinate = sign? integer
+
+  coordinateSeparator
+    = space+ ","? space* -- space
+    | "," space* -- comma
+
+  sign = "-" | "+"
+
+  integer
+    = digit+
+}
