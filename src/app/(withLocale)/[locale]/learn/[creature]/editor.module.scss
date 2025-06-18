@@ -1,3 +1,5 @@
+@use "../../../../../styles/variables.scss";
+
 .container {
   display: flex;
   flex-direction: row;
@@ -72,4 +74,24 @@
   height: 6rem;
   width: 6rem;
   border-radius: 15px;
+}
+
+@media screen and (max-width: variables.$CSS_BREAKPOINT_END_L) {
+  .container {
+    flex-direction: column;
+    gap: var(--vRhythm);
+  }
+  .editor {
+    flex-direction: column;
+  }
+  .textarea {
+    max-width: 100%;
+  }
+  .display {
+    max-width: 100%;
+  }
+  .display svg {
+    max-width: 100%;
+    max-height: 100%;
+  }
 }

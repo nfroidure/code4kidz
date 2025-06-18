@@ -11,6 +11,7 @@ import { getDictionary } from "../../../dictionary";
 import { type Viewport } from "next";
 import Languages from "@/components/languages";
 import Menu from "@/components/menu";
+import { ViewportProvider } from "@/contexts/viewport";
 
 export const viewport: Viewport = {
   themeColor: ORGANISATION_PRIMARY_COLOR,
@@ -48,14 +49,16 @@ export default async function Root({
               : []),
           ].join(" ")}
         >
-          {process.env.NODE_ENV === "development" ? <GridSystem /> : null}
-          <Header locale={locale} dictionary={dictionary} />
-          <Languages locale={locale} />
-          <Menu locale={locale} dictionary={dictionary.menu} />
-          <main className={styles.c4kMain}>
-            <div>{children}</div>
-          </main>
-          <Footer />
+          <ViewportProvider>
+            {process.env.NODE_ENV === "development" ? <GridSystem /> : null}
+            <Header locale={locale} dictionary={dictionary} />
+            <Languages locale={locale} />
+            <Menu locale={locale} dictionary={dictionary.menu} />
+            <main className={styles.c4kMain}>
+              <div>{children}</div>
+            </main>
+            <Footer />
+          </ViewportProvider>
         </body>
       </html>
     </StrictMode>

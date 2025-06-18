@@ -4,6 +4,11 @@
   background-color: var(--light);
   padding: calc(var(--vRhythm) * 2) var(--gutter);
 }
+@media screen and (max-width: variables.$CSS_BREAKPOINT_END_S) {
+  .root {
+    padding: var(--vRhythm) var(--gutter);
+  }
+}
 @media screen and (min-width: variables.$CSS_BREAKPOINT_START_L) {
   .root {
     padding: calc(var(--vRhythm) * 2) calc(var(--gutter) * 2);

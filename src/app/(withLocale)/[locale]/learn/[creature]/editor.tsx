@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "./editor.module.scss";
-import { useEffect, useState, type ReactNode } from "react";
+import { useContext, useEffect, useState, type ReactNode } from "react";
 import {
   commandToPath,
   type Creature,
@@ -18,8 +18,10 @@ import larvaLanguage from "../../../../../languages/larva/larva";
 import ladybugLanguage from "../../../../../languages/ladybug/ladybug";
 import butterflyLanguage from "../../../../../languages/butterfly/butterfly";
 import swallowLanguage from "../../../../../languages/swallow/swallow";
+import { NO_VIEWPORT, ViewportContext } from "@/contexts/viewport";
 
-const DISPLAY_SIZE = 20;
+const THIN_DISPLAY_SIZE = 10;
+const LARGE_DISPLAY_SIZE = 20;
 
 type CreatureLanguagesMap<T extends Creature = Creature> = Record<
   T,
@@ -45,6 +47,11 @@ export default function Editor({
   dictionary: EditorDictionary;
   children: ReactNode;
 }) {
+  const viewport = useContext(ViewportContext);
+  const displaySize =
+    viewport === NO_VIEWPORT || viewport.width < 600
+      ? THIN_DISPLAY_SIZE
+      : LARGE_DISPLAY_SIZE;
   const [code, _setCode] = useState("");
   const [ast, setAST] = useState<ReturnType<
     CreatureLanguages[Creature]["evaluate"]
@@ -67,19 +74,19 @@ export default function Editor({
       <div className={styles.display}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          height={DISPLAY_SIZE * 25}
-          width={DISPLAY_SIZE * 25}
-          viewBox={`0 0 ${DISPLAY_SIZE} ${DISPLAY_SIZE}`}
+          height={displaySize * 25}
+          width={displaySize * 25}
+          viewBox={`0 0 ${displaySize} ${displaySize}`}
           preserveAspectRatio="xMidYMid slice"
           role="img"
           style={{
             backgroundImage: `url(/images/creatures/${creature}.svg)`,
           }}
         >
-          {new Array(DISPLAY_SIZE).fill("").map((_, index) => (
+          {new Array(displaySize).fill("").map((_, index) => (
             <path
               key={`v${index}`}
-              d={`M0,${index}L${DISPLAY_SIZE},${index}`}
+              d={`M0,${index}L${displaySize},${index}`}
               style={{
                 fill: "none",
                 stroke: "grey",
@@ -88,10 +95,10 @@ export default function Editor({
               }}
             />
           ))}
-          {new Array(DISPLAY_SIZE).fill("").map((_, index) => (
+          {new Array(displaySize).fill("").map((_, index) => (
             <path
               key={`h${index}`}
-              d={`M${index},0L${index},${DISPLAY_SIZE}`}
+              d={`M${index},0L${index},${displaySize}`}
               style={{
                 fill: "none",
                 stroke: "grey",
@@ -100,52 +107,48 @@ export default function Editor({
               }}
             />
           ))}
-          {
-            creature === "ant" ? (
-              (() => {
-                const context = { x: 0, y: 0 };
+          {creature === "ant" ? (
+            (() => {
+              const context = { x: 0, y: 0 };
 
-                return (ast || [])
-                  .map((command, index) => {
-                    if (command.type !== "P" && command.type !== "p") {
-                      return [];
+              return (ast || [])
+                .map((command, index) => {
+                  if (command.type !== "P" && command.type !== "p") {
+                    return [];
+                  }
+
+                  return command.sequences.map((sequence, index2) => {
+                    if (command.type === "p") {
+                      context.x += sequence.x;
+                      context.y += sequence.y;
                     }
 
-                    return command.sequences.map((sequence, index2) => {
-                      if (command.type === "p") {
-                        context.x += sequence.x;
-                        context.y += sequence.y;
-                      }
-
-                      return (
-                        <rect
-                          key={`p${index}-${index2}`}
-                          width={1}
-                          height={1}
-                          x={command.type === "p" ? context.x : sequence.x}
-                          y={command.type === "p" ? context.y : sequence.y}
-                          style={{
-                            fill: "green",
-                          }}
-                        />
-                      );
-                    });
-                  })
-                  .flat();
-              })()
-            ) : (
-              <path
-                d={(ast || [])
-                  .map((command) => commandToPath(command))
-                  .join(" ")}
-                style={{
-                  fill: "none",
-                  stroke: "green",
-                  strokeWidth: 0.1,
-                }}
-              />
-            )
-          }
+                    return (
+                      <rect
+                        key={`p${index}-${index2}`}
+                        width={1}
+                        height={1}
+                        x={command.type === "p" ? context.x : sequence.x}
+                        y={command.type === "p" ? context.y : sequence.y}
+                        style={{
+                          fill: "green",
+                        }}
+                      />
+                    );
+                  });
+                })
+                .flat();
+            })()
+          ) : (
+            <path
+              d={(ast || []).map((command) => commandToPath(command)).join(" ")}
+              style={{
+                fill: "none",
+                stroke: "green",
+                strokeWidth: 0.1,
+              }}
+            />
+          )}
         </svg>
       </div>
       <div className={styles.editor}>
