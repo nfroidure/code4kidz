@@ -18,6 +18,9 @@
   "header": {
     "alt": "Code4Kidz's Logo"
   },
+  "footer": {
+    "copyright": "All rights reserved"
+  },
   "menu": {
     "home": {
       "label": "Home",
