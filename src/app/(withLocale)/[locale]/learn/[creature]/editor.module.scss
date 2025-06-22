@@ -1,4 +1,4 @@
-@use "../../../../../styles/variables.scss";
+@use "../../../../../app/variables.scss";
 
 .container {
   display: flex;
@@ -76,7 +76,7 @@
   border-radius: 15px;
 }
 
-@media screen and (max-width: variables.$CSS_BREAKPOINT_END_L) {
+@media screen and (max-width: variables.$CSS_BREAKPOINT_END_S) {
   .container {
     flex-direction: column;
     gap: var(--vRhythm);

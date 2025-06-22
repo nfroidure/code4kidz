@@ -3,7 +3,7 @@
 Les fourmis travaillent toujours très dur ! Cette fourmi ne déroge pas à cette règle !
 Elle ne sait faire que remplir les pixels de l’écran un par un.
 
-Et toi, tu préfères travailler dur ou bien travailler ?
+Et toi, tu préfères travailler dur ou plutôt travailler bien ?
 
 ### Tutoriel
 

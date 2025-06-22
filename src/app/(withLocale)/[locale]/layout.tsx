@@ -57,7 +57,7 @@ export default async function Root({
             <main className={styles.c4kMain}>
               <div>{children}</div>
             </main>
-            <Footer />
+            <Footer dictionary={dictionary['footer']} />
           </ViewportProvider>
         </body>
       </html>
